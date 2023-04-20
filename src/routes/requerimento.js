@@ -13,6 +13,7 @@ router.get('/novo', function(req, res, next) {
 
 router.post('/novo', function(req, res, next) {
   const requerimento = {
+   
     id:  Math.floor(100000 + Math.random() * 900000),
     disciplina: req.body.disciplina,
     prova: req.body.prova,
@@ -20,7 +21,7 @@ router.post('/novo', function(req, res, next) {
     situacao: "Pendente",
     estilo: "badge-warning"
   }
-
+  
   requerimentosDB.data.push(requerimento);
 
   res.redirect('/requerimentos');
