@@ -1,35 +1,25 @@
 const Nota = require('../src/models/nota');
 
-describe('Calculo da média final', () => {
-    test('a media é zero se não tem notas', () => {
-        let nota = new Nota(null, 0, 0, 0);
-        expect(nota.mediaFinal()).toEqual(0);
-        nota = new Nota(null, null, null, null)
-        expect(nota.mediaFinal()).toEqual(0);
+describe('mediaCA', () => {
+    it('retorna "SS - Superior" para nota entre 9.0 e 10.0', () => {
+      expect(mediaCA(9.5)).toBe('SS - Superior');
+      expect(mediaCA(10)).toBe('SS - Superior');
     });
+  
+    it('retorna "MS - Médio Superior" para nota entre 7.0 e 8.9', () => {
+      expect(mediaCA(8)).toBe('MS - Médio Superior');
+      expect(mediaCA(7.5)).toBe('MS - Médio Superior');
+    });
+  
+    it('retorna "MM - Médio" para nota entre 5.0 e 6.9', () => {
+      expect(mediaCA(6)).toBe('MM - Médio');
+      expect(mediaCA(5.5)).toBe('MM - Médio');
+    });
+  
+    it('retorna "MI - Médio Inferior" para nota entre 3.0 e 4.9', () => {
+      expect(mediaCA(4)).toBe('MI - Médio Inferior');
+      expect(mediaCA(3.5)).toBe('MI - Médio Inferior');
+    });
+  
+})
 
-    test('a média é (0.4 * a1) + (0.6 * a2) se tem apenas a1 e a2', () => {
-        let nota = new Nota(null, 3, 5, null);
-        expect(nota.mediaFinal()).toEqual(0.4 * 3 + 0.6 * 5);
-        nota = new Nota(null, 7, 4, null);
-        expect(nota.mediaFinal()).toEqual(0.4 * 7 + 0.6 * 4);
-    });
-
-    test('a média é (0.4 * a3) + (0.6 * a2) se a3 substitui a1', () => {
-        let nota = new Nota(null, 0, 5, 3);
-        expect(nota.mediaFinal()).toEqual(0.4 * 3 + 0.6 * 5);
-        nota = new Nota(null, 2, 5, 3);
-        expect(nota.mediaFinal()).toEqual(0.4 * 3 + 0.6 * 5);
-        nota = new Nota(null, 2, 5, 6);
-        expect(nota.mediaFinal()).toEqual(0.4 * 6 + 0.6 * 5);
-    });
-
-    test('a média é (0.4 * a1) + (0.6 * a3) se a3 substitui a2', () => {
-        let nota = new Nota(null, 6, 0, 5);
-        expect(nota.mediaFinal()).toEqual(0.4 * 6 + 0.6 * 5);
-        nota = new Nota(null, 6, 4, 5);
-        expect(nota.mediaFinal()).toEqual(0.4 * 6 + 0.6 * 5);
-        nota = new Nota(null, 6, 4, 7);
-        expect(nota.mediaFinal()).toEqual(0.4 * 6 + 0.6 * 7);
-    });
-});
