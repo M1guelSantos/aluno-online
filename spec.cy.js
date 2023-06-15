@@ -1,5 +1,5 @@
-describe('Teste de Requerimento', () => {
-    it('Preenchimento do formulário', () => {
+describe('Teste Aluno Online', () => {
+    it('Novo formulário', () => {
       cy.visit('http://localhost:3000/requerimentos/novo')
       cy.get('#inputDisciplina').select('ADS030 - Manutenção de Software e DevOps')
       cy.get('#inputProva').select('A1')
